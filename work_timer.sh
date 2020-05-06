@@ -17,13 +17,17 @@ while true; do
     case $key in
         # s for stop
         "s")
-            stopped=true
-            full_work_time=$(($full_work_time + $last_period_time))
+            if [[ $stopped = false ]]; then
+                stopped=true
+                full_work_time=$(($full_work_time + $last_period_time))
+            fi
             ;;
         # r for restore
         "r")
-            stopped=false
-            start_date=`date +%s`
+            if [[ $stopped = true ]]; then
+                stopped=false
+                start_date=`date +%s`
+            fi
             ;;
         # r for quit
         "q")
